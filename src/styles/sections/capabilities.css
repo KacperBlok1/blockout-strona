@@ -1,0 +1,192 @@
+/* =========================================================
+   CAPABILITIES — pasek haseł + editorialny rząd kompetencji.
+   Świadomie bez kart: same linie, numeracja i typografia.
+   ========================================================= */
+
+.caps {
+  position: relative;
+  padding-bottom: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+/* --- Marquee: dekoracja, więc aria-hidden w JSX --- */
+.caps__marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  padding-block: clamp(0.85rem, 2vw, 1.35rem);
+  background: var(--paper-2);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.caps__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: caps-marquee 42s linear infinite;
+}
+
+.caps__marquee:hover .caps__track,
+.caps__marquee:focus-within .caps__track {
+  animation-play-state: paused;
+}
+
+@keyframes caps-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Bez ruchu — pasek stoi w miejscu, nie „skacze” na koniec pętli. */
+@media (prefers-reduced-motion: reduce) {
+  .caps__track {
+    animation: none;
+  }
+}
+
+.caps__row {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.caps__word {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.1rem, 3vw, 2.2rem);
+  padding-right: clamp(1.1rem, 3vw, 2.2rem);
+  font-size: clamp(1.35rem, 4.2vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+/* Co drugie hasło konturem — rytm zamiast jednolitej ściany tekstu. */
+@supports (-webkit-text-stroke: 1px currentColor) {
+  .caps__word:nth-child(even) {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--fg-muted);
+  }
+}
+
+.caps__sep {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  background: var(--brand);
+  -webkit-text-stroke: 0;
+}
+
+/* --- Rząd kompetencji --- */
+.caps__list {
+  display: grid;
+  gap: 0;
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.caps__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.9rem;
+  row-gap: 0.35rem;
+  padding-block: clamp(1.1rem, 3vw, 1.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.caps__item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.caps__index {
+  grid-row: 1 / 2;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  line-height: 1.7;
+  color: var(--brand);
+  font-variant-numeric: tabular-nums;
+}
+
+.caps__title {
+  grid-column: 2 / 3;
+  font-size: var(--fs-h3);
+  text-wrap: balance;
+}
+
+.caps__text {
+  grid-column: 2 / 3;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+
+/* =========================================================
+   ≥ 641px — dwie kolumny, kreski pionowe
+   ========================================================= */
+@media (min-width: 641px) {
+  .caps__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .caps__item:nth-child(2) {
+    border-top: 1px solid var(--line);
+  }
+
+  .caps__item:nth-last-child(2) {
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+/* =========================================================
+   ≥ 901px — cztery kolumny rozdzielone kreskami
+   ========================================================= */
+@media (min-width: 901px) {
+  .caps__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 0;
+  }
+
+  .caps__item {
+    display: block;
+    padding: clamp(1.25rem, 2.5vw, 1.9rem) clamp(1rem, 2vw, 1.75rem);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .caps__item:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .caps__item:last-child {
+    padding-right: 0;
+  }
+
+  .caps__index {
+    display: block;
+    margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+  }
+
+  .caps__title {
+    margin-bottom: 0.5rem;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Blockout — materiały reklamowe",
+  "short_name": "Blockout",
+  "description": "Materiały reklamowe, druk wielkoformatowy i oznakowanie firm. Koszalin.",
+  "start_url": "/",
+  "display": "standalone",
+  "lang": "pl",
+  "background_color": "#fbfaf8",
+  "theme_color": "#0b0c0e",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

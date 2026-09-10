@@ -1,0 +1,539 @@
+/* =========================================================
+   SEKCJA: REALIZACJE
+   Nieregularna siatka, filtry z animowanym tłem, lightbox.
+   ========================================================= */
+
+.projects {
+  background: var(--paper-2);
+}
+
+/* --- Filtry --- */
+.projects__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.projects__filter {
+  position: relative;
+  isolation: isolate;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--fg-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition:
+    color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.projects__filter:hover {
+  color: var(--fg);
+  border-color: var(--ink);
+}
+
+.projects__filter--active {
+  z-index: 1;
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.projects__filter--active:hover {
+  color: var(--paper);
+}
+
+.projects__filter-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--ink);
+  border-radius: var(--r-pill);
+}
+
+.projects__filter-label {
+  position: relative;
+}
+
+/* --- Notka o materiale poglądowym --- */
+.projects__note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  max-width: 74ch;
+  margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+  font-size: var(--fs-sm);
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+
+.projects__note-tag {
+  flex: none;
+  padding: 0.22rem 0.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* --- Siatka --- */
+.projects__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(0.75rem, 1.6vw, 1.1rem);
+}
+
+.projects__item {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+}
+
+.projects__card {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  border-radius: var(--r-xs);
+  background: var(--paper-3);
+}
+
+.projects__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.projects__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Przyciemnienie pod panelem */
+.projects__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--ink);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+  pointer-events: none;
+}
+
+.projects__card:hover::after,
+.projects__card:focus-within::after {
+  opacity: 0.55;
+}
+
+/* Etykieta „materiał poglądowy” */
+.projects__tag {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  z-index: 2;
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--fg-muted);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* --- Panel wjeżdżający z dołu --- */
+.projects__panel {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: clamp(0.9rem, 2vw, 1.35rem);
+  background: var(--ink);
+  color: var(--fg-on-ink);
+  transform: translate3d(0, 100%, 0);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.projects__card:hover .projects__panel,
+.projects__card:focus-within .projects__panel {
+  transform: translate3d(0, 0, 0);
+}
+
+.projects__cat {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--brand-bright);
+}
+
+.projects__title {
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+}
+
+/* Przycisk-tytuł rozciągnięty na cały kafel (klip przez overflow karty). */
+.projects__trigger {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.projects__trigger::after {
+  content: '';
+  position: absolute;
+  inset: -100em;
+  z-index: 3;
+}
+
+.projects__summary {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--fg-on-ink-muted);
+  text-wrap: pretty;
+}
+
+.projects__result {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--brand-bright);
+}
+.projects__result::before {
+  content: '';
+  flex: none;
+  width: 12px;
+  height: 2px;
+  background: currentColor;
+  transform: translateY(-0.25em);
+}
+
+/* Dotyk: hover nie istnieje — treść widoczna od razu. */
+@media (hover: none) {
+  .projects__panel {
+    transform: none;
+  }
+  .projects__card::after {
+    opacity: 0.35;
+  }
+}
+
+/* --- CTA pod siatką --- */
+.projects__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: clamp(2rem, 4vw, 3.25rem);
+  padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  border-top: 1px solid var(--line);
+}
+
+.projects__cta-text {
+  font-size: var(--fs-lead);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+}
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+
+.projects__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 3vw, 2.5rem);
+}
+
+.projects__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  opacity: 0.84;
+}
+
+.projects__dialog {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: min(1040px, 100%);
+  max-height: 88vh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--paper);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-lg);
+}
+
+.projects__close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--fg);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  transition:
+    background var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+.projects__close:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.projects__dialog-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--paper-3);
+}
+
+.projects__dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.projects__dialog-title {
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.projects__dialog-summary {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+
+.projects__dialog .projects__result {
+  color: var(--brand);
+}
+
+.projects__dialog-note {
+  font-size: var(--fs-xs);
+  letter-spacing: -0.01em;
+  color: var(--fg-subtle);
+}
+
+.projects__dialog-actions {
+  margin-top: 0.4rem;
+}
+
+.projects__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+.projects__nav-btn {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+.projects__nav-btn:hover:not(:disabled) {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.projects__nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.projects__counter {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-subtle);
+}
+
+/* =========================================================
+   WZÓR ZASTĘPCZY (ProjectPlaceholder)
+   ========================================================= */
+
+.ph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ph-bg);
+}
+
+.ph--t1 {
+  --ph-bg: var(--paper-2);
+  --ph-fill: var(--ink);
+  --ph-word: var(--paper);
+  --ph-accent: var(--brand);
+  --ph-stroke: var(--line-strong);
+  --ph-mesh: 0.55;
+}
+.ph--t2 {
+  --ph-bg: var(--paper-3);
+  --ph-fill: var(--brand);
+  --ph-word: var(--paper);
+  --ph-accent: var(--ink);
+  --ph-stroke: var(--line-strong);
+  --ph-mesh: 0.45;
+}
+.ph--t3 {
+  --ph-bg: var(--paper);
+  --ph-fill: var(--paper-3);
+  --ph-word: var(--ink);
+  --ph-accent: var(--brand);
+  --ph-stroke: var(--line-strong);
+  --ph-mesh: 0.7;
+}
+.ph--t4 {
+  --ph-bg: var(--ink);
+  --ph-fill: var(--paper-2);
+  --ph-word: var(--ink);
+  --ph-accent: var(--brand);
+  --ph-stroke: var(--line-strong);
+  --ph-mesh: 0.18;
+}
+
+/* Delikatna siatka drukarska */
+.ph__mesh {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--line) 0 1px,
+    transparent 1px 8px
+  );
+  opacity: var(--ph-mesh);
+}
+
+.ph__stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 5%;
+}
+
+.ph__art {
+  width: 100%;
+  height: 100%;
+}
+
+.ph__fill {
+  fill: var(--ph-fill);
+}
+.ph__accent {
+  fill: var(--ph-accent);
+}
+.ph__dots {
+  fill: var(--ph-accent);
+}
+.ph__stroke line {
+  stroke: var(--ph-stroke);
+  stroke-width: 2;
+}
+
+.ph__word {
+  fill: var(--ph-word);
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: -0.04em;
+}
+.ph__word--stack {
+  font-size: 26px;
+}
+.ph__word--serif {
+  fill: var(--ph-accent);
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.015em;
+}
+
+.ph__label {
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.7rem;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ph--t4 .ph__label {
+  color: var(--fg-on-ink-muted);
+}
+
+/* =========================================================
+   PUNKTY ŁAMANIA
+   ========================================================= */
+
+@media (min-width: 640px) {
+  .projects__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Rozpiętość i proporcje kafla ustawia JS (patrz hooks/useGridColumns),
+     bo tylko znając liczbę widocznych kafli da się domknąć każdy wiersz. */
+}
+
+@media (min-width: 900px) {
+  .projects__dialog {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+  .projects__dialog-media {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 420px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .projects__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 1.6vw, 1.4rem);
+  }
+}

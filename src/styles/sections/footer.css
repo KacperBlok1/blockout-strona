@@ -1,0 +1,187 @@
+/* =========================================================
+   STOPKA — ciemna, spokojna, dobrze złamana.
+   Na mobile zostawia miejsce na przyklejony pasek CTA (≤900px).
+   ========================================================= */
+
+.footer {
+  --footer-mobile-bar: 76px;
+
+  background: var(--ink);
+  color: var(--fg-on-ink);
+  padding-top: clamp(3.5rem, 8vw, 6rem);
+  padding-bottom: calc(2.5rem + env(safe-area-inset-bottom));
+}
+
+.footer__top {
+  display: grid;
+  gap: clamp(2.25rem, 5vw, 3rem);
+}
+
+/* --- Blok marki --- */
+.footer__brand {
+  max-width: 40ch;
+}
+
+.footer__logo {
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-display);
+  line-height: 1;
+}
+
+.footer__logo i {
+  font-style: normal;
+  color: var(--brand-bright);
+}
+
+.footer__about {
+  margin-top: 1rem;
+  color: var(--fg-on-ink-muted);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+/* --- Kolumny --- */
+.footer__cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.footer__col-title {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  margin-bottom: 1rem;
+}
+
+.footer__list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.footer__link {
+  display: inline-block;
+  font-size: var(--fs-sm);
+  color: var(--fg-on-ink-muted);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.footer__link:hover,
+.footer__link:focus-visible {
+  color: var(--fg-on-ink);
+  transform: translateX(3px);
+}
+
+.footer__contact-link {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg-on-ink);
+}
+
+.footer__contact-link:hover,
+.footer__contact-link:focus-visible {
+  color: var(--brand-bright);
+}
+
+.footer__address {
+  font-size: var(--fs-sm);
+  color: var(--fg-on-ink-muted);
+  line-height: 1.6;
+}
+
+/* Linki do podstron, których jeszcze nie ma — dyskretny znacznik roboczy. */
+.footer__link--todo {
+  border-bottom: 1px dashed var(--line-on-ink);
+}
+
+/* --- Social --- */
+.footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  padding-inline: 0.9rem;
+  border: 1px solid var(--line-on-ink);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-on-ink-muted);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.footer__social-link:hover,
+.footer__social-link:focus-visible {
+  color: var(--fg-on-ink);
+  border-color: var(--brand-bright);
+}
+
+/* --- Dół --- */
+.footer__rule {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  background: var(--line-on-ink);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1.5rem;
+  padding-top: 1.5rem;
+  font-size: var(--fs-xs);
+  color: var(--fg-subtle);
+}
+
+.footer__made {
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   ≤ 900px — miejsce na przyklejony pasek CTA
+   ========================================================= */
+@media (max-width: 900px) {
+  .footer {
+    padding-bottom: calc(
+      var(--footer-mobile-bar) + 2rem + env(safe-area-inset-bottom)
+    );
+  }
+}
+
+/* =========================================================
+   ≥ 640px — trzy kolumny linków
+   ========================================================= */
+@media (min-width: 640px) {
+  .footer__cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   ≥ 900px — marka po lewej, kolumny po prawej
+   ========================================================= */
+@media (min-width: 900px) {
+  .footer__top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    column-gap: clamp(3rem, 7vw, 6rem);
+    align-items: start;
+  }
+}

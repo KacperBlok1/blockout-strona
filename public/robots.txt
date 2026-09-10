@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: podmień domenę, jeśli strona stanie pod innym adresem.
+Sitemap: https://blockout.pl/sitemap.xml

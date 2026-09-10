@@ -1,0 +1,26 @@
+/* =========================================================
+   BLOCKOUT — punkt wejścia stylów
+   Kolejność ma znaczenie: tokeny → baza → sekcje.
+   ========================================================= */
+
+/* Fonty hostowane lokalnie zamiast z Google Fonts:
+   szybciej (brak trzeciego połączenia TCP), bez wysyłania IP użytkowników
+   do Google — co przy RODO ma znaczenie — i bez ryzyka blokady zewnętrznego CDN.
+   Przeglądarka pobiera tylko te podzbiory znaków, których faktycznie użyje. */
+@import '@fontsource-variable/archivo/wght.css';
+@import '@fontsource/instrument-serif/400-italic.css';
+
+@import './tokens.css';
+@import './base.css';
+
+@import './sections/header.css';
+@import './sections/hero.css';
+@import './sections/capabilities.css';
+@import './sections/services.css';
+@import './sections/projects.css';
+@import './sections/process.css';
+@import './sections/why.css';
+@import './sections/cta.css';
+@import './sections/faq.css';
+@import './sections/contact.css';
+@import './sections/footer.css';

@@ -1,0 +1,109 @@
+/* =========================================================
+   BLOCKOUT — TOKENY DESIGNU
+   Jedno źródło prawdy dla kolorów, typografii, rytmu i ruchu.
+   Nie wpisuj wartości "na sztywno" w plikach sekcji — używaj tokenów.
+   ========================================================= */
+
+:root {
+  /* --- Kolory: powierzchnie --- */
+  --paper: #fbfaf8; /* ciepła biel — tło główne */
+  --paper-2: #f3f1ec; /* przełamana sekcja */
+  --paper-3: #ebe8e1; /* subtelne wypełnienie */
+  --ink: #0b0c0e; /* czerń — tekst i sekcje kontrastowe */
+  --ink-2: #16181c; /* czerń podniesiona */
+  --ink-3: #22252a; /* obrys na czerni */
+
+  /* --- Kolory: tekst --- */
+  --fg: #0b0c0e;
+  --fg-muted: #63686f; /* 4.97:1 na --paper-2, 5.38:1 na --paper — WCAG AA */
+  --fg-subtle: #9aa0a8;
+  --fg-on-ink: #f4f3f1;
+  --fg-on-ink-muted: #a2a7ae;
+
+  /* --- Kolory: marka --- */
+  --brand: #1668c8; /* niebieski Blockout, pogłębiony */
+  --brand-hover: #1257a8;
+  --brand-bright: #4fa8ff; /* na ciemnym tle */
+  --brand-wash: #e8f2fd; /* delikatne wypełnienie */
+
+  /* --- Kolory: stany --- */
+  --danger: #c0392b;
+  --success: #167a4a;
+
+  /* --- Linie --- */
+  --line: #e0dcd4;
+  --line-strong: #c9c4ba;
+  --line-on-ink: rgba(255, 255, 255, 0.14);
+
+  /* --- Typografia --- */
+  --font-sans:
+    'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+
+  /* Skala nagłówków — płynna, bez layout shiftu */
+  --fs-display: clamp(3.2rem, 9.5vw, 8.5rem);
+  --fs-h1: clamp(2.7rem, 7vw, 6rem);
+  --fs-h2: clamp(2.1rem, 4.6vw, 4.2rem);
+  --fs-h3: clamp(1.25rem, 1.9vw, 1.6rem);
+  --fs-lead: clamp(1.02rem, 1.35vw, 1.2rem);
+  --fs-body: 1rem;
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.75rem;
+
+  --tracking-display: -0.045em;
+  --tracking-tight: -0.03em;
+  --tracking-wide: 0.14em;
+
+  /* --- Rytm --- */
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --measure: 1320px;
+  --section-y: clamp(5.5rem, 11vw, 10rem);
+  --header-h: 76px;
+  --header-h-sm: 64px;
+
+  /* --- Kształt: świadomie ostry. Zaokrąglenia tylko tam, gdzie mają sens. --- */
+  --r-none: 0px;
+  --r-xs: 2px;
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-pill: 999px;
+
+  /* --- Cień: minimalny, nigdy jako dekoracja --- */
+  --shadow-sm: 0 1px 2px rgba(11, 12, 14, 0.05);
+  --shadow-md: 0 12px 32px -12px rgba(11, 12, 14, 0.18);
+  --shadow-lg: 0 32px 70px -24px rgba(11, 12, 14, 0.32);
+
+  /* --- Ruch --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 620ms;
+
+  /* --- Warstwy --- */
+  --z-header: 100;
+  --z-mobile-cta: 90;
+  --z-menu: 200;
+  --z-modal: 300;
+  --z-skip: 400;
+
+  color-scheme: light;
+}
+
+/* Użytkownik prosi o mniej ruchu — respektujemy globalnie. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0.01ms;
+    --dur: 0.01ms;
+    --dur-slow: 0.01ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

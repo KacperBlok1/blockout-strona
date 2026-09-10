@@ -1,0 +1,172 @@
+/* =========================================================
+   SEKCJA: JAK PRACUJEMY
+   Oś czasu rysowana przy przewijaniu — pozioma na desktopie,
+   pionowa na mobile. Sekcja na czerni.
+   ========================================================= */
+
+.process {
+  overflow: hidden;
+}
+
+.process__track {
+  position: relative;
+}
+
+/* --- Szyna osi --- */
+.process__rail {
+  position: absolute;
+  z-index: 0;
+  background: var(--line-on-ink);
+  pointer-events: none;
+}
+
+.process__rail-fill {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: var(--brand-bright);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* Wariant poziomy — domyślnie schowany (mobile-first). */
+.process__rail:not(.process__rail--v) {
+  display: none;
+}
+
+/* Wariant pionowy */
+.process__rail--v {
+  top: 0.45rem;
+  bottom: 0.5rem;
+  left: 6px;
+  width: 2px;
+}
+
+.process__rail-fill--v {
+  transform-origin: center top;
+}
+
+/* --- Kroki --- */
+.process__steps {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.75rem, 5vw, 2.5rem);
+}
+
+.process__step {
+  position: relative;
+  min-width: 0;
+  padding-left: 2.75rem;
+}
+
+.process__marker {
+  position: absolute;
+  top: 0.45rem;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--brand-bright);
+  box-sizing: border-box;
+}
+
+.process__num {
+  display: block;
+  font-size: clamp(2.1rem, 5.5vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  color: var(--fg-on-ink);
+}
+
+.process__title {
+  margin-top: 0.7rem;
+  color: var(--fg-on-ink);
+  text-wrap: balance;
+}
+
+.process__text {
+  margin-top: 0.5rem;
+  max-width: 42ch;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--fg-on-ink-muted);
+  text-wrap: pretty;
+}
+
+/* --- Stopka sekcji --- */
+.process__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  border-top: 1px solid var(--line-on-ink);
+}
+
+.process__foot-text {
+  flex: 1 1 24ch;
+  font-size: var(--fs-lead);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-on-ink);
+}
+
+/* =========================================================
+   PUNKTY ŁAMANIA
+   ========================================================= */
+
+@media (min-width: 900px) {
+  /* Oś przechodzi w poziom. */
+  .process__rail--v {
+    display: none;
+  }
+  .process__rail:not(.process__rail--v) {
+    display: block;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 2px;
+  }
+
+  .process__steps {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(1rem, 2.2vw, 2rem);
+  }
+
+  .process__step {
+    padding-left: 0;
+    padding-top: 2.6rem;
+  }
+
+  .process__marker {
+    top: 0;
+    left: 0;
+  }
+
+  .process__num {
+    font-size: clamp(1.9rem, 2.6vw, 2.6rem);
+  }
+
+  .process__title {
+    font-size: clamp(1.02rem, 1.35vw, 1.25rem);
+  }
+
+  .process__text {
+    font-size: var(--fs-xs);
+    line-height: 1.65;
+  }
+}
+
+@media (min-width: 1200px) {
+  .process__title {
+    font-size: var(--fs-h3);
+  }
+  .process__text {
+    font-size: var(--fs-sm);
+  }
+}

@@ -1,0 +1,137 @@
+/* =========================================================
+   DLACZEGO BLOCKOUT — układ editorialny, nie siatka kart.
+   Lewa kolumna zostaje w miejscu (sticky), prawa przewija się
+   jak dobrze złamana kolumna tekstu w magazynie.
+   ========================================================= */
+
+.why {
+  background: var(--paper);
+}
+
+.why__inner {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.why__sticky {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Miary nagłówka i leadu pilnuje base.css — tu tylko zdejmujemy margines. */
+.why__head {
+  margin-bottom: 0;
+}
+
+.why__note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.75rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.why__note:hover,
+.why__note:focus-visible {
+  color: var(--brand);
+  border-color: var(--brand);
+}
+
+.why__note svg {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.why__note:hover svg {
+  transform: translateX(4px);
+}
+
+/* --- Lista zalet ---
+   Wszystkie tytuły stoją na jednej osi. Rytm budują: stała kolumna numeru
+   po lewej, hairline między pozycjami i odstęp — nie przesuwanie wierszy. */
+.why__list {
+  border-top: 1px solid var(--line);
+}
+
+.why__item {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0 clamp(0.85rem, 2.2vw, 1.35rem);
+  align-items: start;
+  padding-block: clamp(1.5rem, 3.2vw, 2.1rem);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Numer: stała kolumna marginesowa — jedyna, konsekwentna asymetria listy.
+   Wielkość podpisu, nie nagłówka, żeby nie konkurował z <h3>. */
+.why__index {
+  font-size: var(--fs-sm);
+  font-weight: 800;
+  letter-spacing: var(--tracking-wide);
+  line-height: 1;
+  color: var(--fg-subtle);
+  font-variant-numeric: tabular-nums;
+  /* wyrównanie optyczne do pierwszej linii <h3> */
+  padding-top: 0.5em;
+  transition: color var(--dur) var(--ease-out);
+}
+
+.why__item:hover .why__index {
+  color: var(--brand);
+}
+
+.why__title {
+  text-wrap: balance;
+}
+
+.why__text {
+  margin-top: 0.7rem;
+  max-width: 46ch;
+  color: var(--fg-muted);
+  line-height: 1.66;
+  text-wrap: pretty;
+}
+
+/* =========================================================
+   ≥ 640px — szersza kolumna numeru, więcej powietrza w rytmie
+   ========================================================= */
+@media (min-width: 640px) {
+  .why__item {
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+    padding-block: clamp(1.9rem, 3.6vw, 2.6rem);
+  }
+}
+
+/* =========================================================
+   ≥ 900px — dwie kolumny, lewa przyklejona
+   ========================================================= */
+@media (min-width: 900px) {
+  .why__inner {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(3rem, 7vw, 6.5rem);
+    /* Świadomie bez align-items: start — element siatki musi się rozciągnąć,
+       inaczej position: sticky nie ma po czym jechać. */
+  }
+
+  .why__sticky {
+    position: sticky;
+    top: calc(var(--header-h) + 3rem);
+  }
+}
+
+/* =========================================================
+   ≥ 1200px — szersza kolumna numeru
+   ========================================================= */
+@media (min-width: 1200px) {
+  .why__item {
+    grid-template-columns: 4rem minmax(0, 1fr);
+  }
+}

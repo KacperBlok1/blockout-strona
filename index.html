@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0c0e" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Meta dane, dane strukturalne i preload kroju wstrzykiwane
+         przy buildzie z src/content/* — patrz vite.config.ts.
+         Dzięki temu widzą je także roboty, które nie wykonują JS. -->
+    <!--seo-->
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; font-family: system-ui, sans-serif">
+        <h1>Blockout — materiały reklamowe</h1>
+        <p>
+          Ta strona wymaga włączonego JavaScriptu. Skontaktuj się z nami
+          bezpośrednio:
+          <a href="tel:+48510133203">510 133 203</a> lub
+          <a href="mailto:kontakt@blockout.pl">kontakt@blockout.pl</a>.
+        </p>
+        <p>Fińska 43B, 75-430 Koszalin</p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

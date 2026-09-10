@@ -1,0 +1,341 @@
+/* =========================================================
+   HEADER — sticky, przezroczysty na starcie, „przyklejony” po przewinięciu.
+   Zmiana wysokości robiona jest transformacją tła, nie właściwością height,
+   więc nie ma ani layout shiftu, ani przeliczania układu w trakcie scrolla.
+   ========================================================= */
+
+.header {
+  --header-current: var(--header-h);
+  /* 64 / 76 — tło kurczy się do wysokości „po przewinięciu” */
+  --header-squeeze: 0.842;
+  --header-lift: -6px;
+  --header-line-lift: -12px;
+
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  height: var(--header-current);
+}
+
+/* --- Tło + rozmycie: pojawia się dopiero przy przewinięciu --- */
+.header__backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  opacity: 0;
+  transform-origin: top center;
+  transition:
+    opacity var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out);
+  pointer-events: none;
+}
+
+.header__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--header-current);
+  height: 1px;
+  background: var(--line);
+  opacity: 0;
+  transition:
+    opacity var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out);
+  pointer-events: none;
+}
+
+.header--scrolled .header__backdrop {
+  opacity: 1;
+  transform: scaleY(var(--header-squeeze));
+}
+
+.header--scrolled .header__line {
+  opacity: 1;
+  transform: translateY(var(--header-line-lift));
+}
+
+/* --- Rząd z logo, nawigacją i CTA --- */
+.header__inner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.header--scrolled .header__inner {
+  transform: translateY(var(--header-lift));
+}
+
+/* --- Logo --- */
+.header__logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-display);
+  line-height: 1;
+  margin-right: auto;
+  white-space: nowrap;
+}
+
+.header__logo i {
+  font-style: normal;
+  color: var(--brand);
+}
+
+/* --- Nawigacja --- */
+.header__nav {
+  display: none;
+}
+
+.header__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2rem);
+}
+
+.header__link {
+  position: relative;
+  display: inline-block;
+  padding-block: 0.35rem;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg-muted);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.header__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.header__link:hover,
+.header__link:focus-visible,
+.header__link--active {
+  color: var(--fg);
+}
+
+.header__link:hover::after,
+.header__link:focus-visible::after,
+.header__link--active::after {
+  transform: scaleX(1);
+}
+
+.header__cta {
+  display: none;
+}
+
+/* --- Hamburger: dwie kreski, które składają się w X --- */
+.header__burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.header__burger-box {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 12px;
+}
+
+.header__burger-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--fg);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.header__burger-line:first-child {
+  top: 0;
+}
+.header__burger-line:last-child {
+  bottom: 0;
+}
+
+.header__burger--open .header__burger-line:first-child {
+  transform: translateY(5px) rotate(45deg);
+}
+.header__burger--open .header__burger-line:last-child {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+/* --- Menu pełnoekranowe --- */
+.header__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+}
+
+.header__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 12, 14, 0.42);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.header__panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: calc(var(--header-h-sm) + 1.5rem) var(--gutter)
+    calc(2rem + env(safe-area-inset-bottom));
+  background: var(--paper);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.header__panel-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.header__panel-link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding-block: clamp(0.7rem, 2.4vw, 1.05rem);
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(1.75rem, 8vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: var(--tracking-display);
+  line-height: 1;
+}
+
+.header__panel-link[aria-current='true'] {
+  color: var(--brand);
+}
+
+.header__panel-index {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-subtle);
+}
+
+.header__panel-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.header__panel-contact {
+  font-size: var(--fs-lead);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+}
+
+.header__panel-contact:hover {
+  color: var(--brand);
+}
+
+.header__panel-cta {
+  margin-top: 0.85rem;
+  align-self: stretch;
+}
+
+/* =========================================================
+   ≥ 901px — pełna nawigacja, brak hamburgera
+   ========================================================= */
+@media (min-width: 901px) {
+  .header__nav,
+  .header__cta {
+    display: block;
+  }
+
+  .header__burger,
+  .header__overlay {
+    display: none;
+  }
+}
+
+/* =========================================================
+   ≤ 900px — niższy pasek
+   ========================================================= */
+@media (max-width: 900px) {
+  .header {
+    --header-current: var(--header-h-sm);
+    /* 56 / 64 */
+    --header-squeeze: 0.875;
+    --header-lift: -4px;
+    --header-line-lift: -8px;
+  }
+
+  .header__logo {
+    font-size: 1.25rem;
+  }
+}
+
+/* =========================================================
+   MOBILEBAR — pasek akcji przyklejony do dołu na małych ekranach.
+   Style trzymamy tu, bo to element warstwy layoutu, tak jak header.
+   ========================================================= */
+
+.mobilebar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-mobile-cta);
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.7rem var(--gutter) calc(0.7rem + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border-top: 1px solid var(--line);
+  will-change: transform;
+}
+
+/* Etykiety w .btn są nierozdzielne — na 360px muszą zmieścić się w połowie paska. */
+.mobilebar__action {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-inline: 0.6rem;
+  font-size: var(--fs-xs);
+}
+
+.mobilebar__action.btn--outline {
+  background: var(--paper);
+}
+
+/* Pasek nie może zasłonić stopki — rezerwujemy miejsce w dokumencie. */
+@media (max-width: 900px) {
+  body {
+    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (min-width: 901px) {
+  .mobilebar {
+    display: none;
+  }
+}
