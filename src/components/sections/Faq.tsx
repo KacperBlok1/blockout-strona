@@ -27,7 +27,7 @@ export function Faq() {
               Pytania, które słyszymy <em>najczęściej</em>
             </h2>
             <p className="lead">
-              Jeśli czegoś tu brakuje — napisz. Odpowiadamy konkretem, a nie
+              Jeśli czegoś tu brakuje - napisz. Odpowiadamy konkretem, a nie
               ogólnikami.
             </p>
           </div>

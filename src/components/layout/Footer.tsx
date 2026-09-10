@@ -27,7 +27,7 @@ export function Footer() {
               block<i>out</i>
             </a>
             <p className="footer__about">
-              Projektujemy i produkujemy materiały reklamowe dla firm — od
+              Projektujemy i produkujemy materiały reklamowe dla firm - od
               wizytówek po druk wielkoformatowy. Pracujemy w Koszalinie, przy
               Fińskiej 43B.
             </p>

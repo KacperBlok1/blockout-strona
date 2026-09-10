@@ -29,7 +29,7 @@ export function Contact() {
           </h2>
           <p className="lead">
             Wystarczy kilka zdań: co, w jakim formacie i gdzie ma stanąć. Resztę
-            dopytamy sami — wycena jest bez zobowiązań.
+            dopytamy sami - wycena jest bez zobowiązań.
           </p>
         </Reveal>
 

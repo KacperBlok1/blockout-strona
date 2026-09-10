@@ -43,7 +43,7 @@ export function CtaBand() {
           transition={{ duration: 0.75, delay: 0.1, ease: EASE }}
         >
           Masz gotowy projekt, luźny pomysł albo tylko firmę, której nikt nie
-          zauważa po drugiej stronie ulicy? Napisz, co ma powstać — wrócimy z
+          zauważa po drugiej stronie ulicy? Napisz, co ma powstać - wrócimy z
           konkretną propozycją i wyceną.
         </motion.p>
 

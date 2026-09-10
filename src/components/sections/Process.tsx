@@ -74,7 +74,7 @@ export function Process() {
 
         <div className="process__foot">
           <p className="process__foot-text">
-            Najprościej zacząć od krótkiej wiadomości — resztę ustalimy w
+            Najprościej zacząć od krótkiej wiadomości - resztę ustalimy w
             rozmowie.
           </p>
           <a className="btn btn--light" href="#kontakt">

@@ -15,7 +15,7 @@ export function WhyUs() {
               </h2>
               <p className="lead">
                 Pracujemy tak, żeby gotowy materiał pasował do miejsca, w którym
-                stanie — i wyglądał dobrze dłużej niż tydzień. Sześć rzeczy, po
+                stanie - i wyglądał dobrze dłużej niż tydzień. Sześć rzeczy, po
                 których to poznasz.
               </p>
             </div>

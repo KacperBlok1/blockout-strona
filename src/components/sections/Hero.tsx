@@ -86,7 +86,7 @@ export function Hero() {
         <div className="hero__copy">
           <motion.p className="lead hero__lead" {...rise(0.44)}>
             Projektujemy i produkujemy banery, billboardy, szyldy, roll-upy i
-            druk wielkoformatowy — od pliku po materiał gotowy do montażu. Opisz
+            druk wielkoformatowy - od pliku po materiał gotowy do montażu. Opisz
             swój projekt, a odpowiemy konkretną propozycją zamiast widełek
             cenowych.
           </motion.p>

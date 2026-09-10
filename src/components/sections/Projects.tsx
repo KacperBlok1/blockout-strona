@@ -158,7 +158,7 @@ export function Projects() {
             Reklama, która pracuje <em>w terenie</em>
           </h2>
           <p className="lead">
-            Typy realizacji, które wykonujemy najczęściej — od banerów na halę
+            Typy realizacji, które wykonujemy najczęściej - od banerów na halę
             po komplet materiałów firmowych.
           </p>
         </header>
@@ -267,7 +267,7 @@ export function Projects() {
                         {project.title}
                         <span className="visually-hidden">
                           {' '}
-                          — otwórz podgląd
+                          - otwórz podgląd
                         </span>
                       </button>
                     </h3>
@@ -359,7 +359,7 @@ export function Projects() {
                 )}
                 {!current.image && (
                   <p className="projects__dialog-note">
-                    Wzór poglądowy — w tym miejscu stanie zdjęcie realizacji.
+                    Wzór poglądowy - w tym miejscu stanie zdjęcie realizacji.
                   </p>
                 )}
 
