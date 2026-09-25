@@ -34,7 +34,6 @@ export function Services() {
           </p>
         </header>
 
-        {/* TODO (weryfikacja): potwierdź pełną listę usług przed publikacją */}
         <ul className="services__grid">
           {services.map((service, i) => (
             <Reveal

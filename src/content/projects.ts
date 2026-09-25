@@ -1,15 +1,3 @@
-/**
- * REALIZACJE — PLACEHOLDERY.
- *
- * ⚠️ To NIE są prawdziwe projekty. Nie ma tu nazw klientów ani opisów wykonanych
- * zleceń, bo nie zostały dostarczone materiały. Każda pozycja opisuje TYP realizacji.
- *
- * TODO przed publikacją:
- * 1. Podmień `title` na nazwę realizacji lub klienta (za jego zgodą).
- * 2. Wpisz `image` — ścieżkę do zdjęcia w /public/realizacje/ (np. '/realizacje/baner-hala.jpg').
- *    Dopóki `image` jest puste, renderuje się placeholder typograficzny.
- * 3. Uzupełnij `result` prawdziwym efektem dla klienta albo usuń to pole.
- */
 export type Category = 'wielki-format' | 'oznakowanie' | 'ekspozycja' | 'druk'
 
 export type Project = {
@@ -17,9 +5,7 @@ export type Project = {
   title: string
   category: Category
   categoryLabel: string
-  /** Krótki opis typu realizacji. TODO: zastąp opisem prawdziwego projektu. */
   summary: string
-  /** TODO: prawdziwy efekt biznesowy lub usuń. Puste = nie renderuje się. */
   result: string
   /** Ścieżka do zdjęcia w /public. Puste = placeholder. */
   image: string

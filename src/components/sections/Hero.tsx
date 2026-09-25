@@ -110,7 +110,6 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* TODO: docelowo podmienić na zdjęcia realizacji — patrz README */}
         <motion.div
           className="hero__visual"
           ref={visualRef}

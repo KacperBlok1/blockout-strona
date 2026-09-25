@@ -24,25 +24,15 @@ export const site = {
     full: 'Fińska 43B, 75-430 Koszalin',
   },
 
-  /** TODO: podmień na docelową domenę przed publikacją (używane w canonical, OG i sitemap). */
   url: 'https://blockout.pl',
-  /** TODO: wygeneruj obraz 1200×630 i wgraj do /public. */
   ogImage: '/og-blockout.jpg',
 
-  /**
-   * TODO: uzupełnij o prawdziwe profile albo usuń cały obiekt.
-   * Puste wartości nie renderują się w stopce.
-   */
   social: {
     facebook: '',
     instagram: '',
     linkedin: '',
   },
 
-  /**
-   * TODO: potwierdź godziny pracy przed publikacją.
-   * Dopóki to pusta tablica, schema.org NIE deklaruje godzin otwarcia.
-   */
   openingHours: [] as string[],
 } as const
 

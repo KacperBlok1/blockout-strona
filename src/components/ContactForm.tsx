@@ -7,17 +7,6 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { inquiryTopics } from '../content/process'
 import { site } from '../content/site'
 
-/**
- * TODO (podłączenie wysyłki): utwórz w katalogu głównym projektu plik `.env`
- * i wpisz w nim adres swojego formularza, np.:
- *
- *   VITE_CONTACT_ENDPOINT=https://formspree.io/f/TWOJ_ID
- *
- * Działa tak samo z Web3Forms (https://api.web3forms.com/submit) — wtedy
- * dodatkowo przekaż w payloadzie swój `access_key`.
- * Dopóki zmienna nie jest ustawiona, formularz NIE udaje wysyłki —
- * pokazuje informację i alternatywne kanały kontaktu.
- */
 const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
@@ -394,7 +383,6 @@ export function ContactForm() {
           />
           <label className="form__consent-text" htmlFor="contact-consent">
             Zgadzam się na kontakt w sprawie tego zapytania.{' '}
-            {/* TODO: utworzyć podstronę /polityka-prywatnosci albo podmienić link. */}
             <a
               className="form__consent-link"
               href="/polityka-prywatnosci"

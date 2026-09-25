@@ -1,12 +1,3 @@
-/**
- * Oferta.
- * Wszystkie pozycje pochodzą z listy usług z dotychczasowej strony Blockout:
- * banery, billboardy, wizytówki, plakaty, roll-upy, naklejki, szyldy,
- * reklama wielkoformatowa.
- *
- * TODO (weryfikacja): opisy i wypunktowania to propozycje copy — potwierdź,
- * że każda wymieniona pozycja faktycznie jest w ofercie, zanim opublikujesz.
- */
 export type Service = {
   id: string
   index: string

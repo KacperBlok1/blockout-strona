@@ -1,9 +1,3 @@
-/**
- * Proces współpracy.
- * TODO (weryfikacja): potwierdź, że kroki odpowiadają temu, jak realnie
- * pracuje Blockout. Świadomie brak deklaracji terminów — nie obiecujemy czasu,
- * którego nie potwierdziliśmy.
- */
 export const process = [
   {
     step: '01',
@@ -64,13 +58,6 @@ export const advantages = [
   },
 ]
 
-/**
- * FAQ — odpowiedzi celowo ostrożne.
- * ⚠️ Nie deklarujemy terminów, kosztów dostawy ani zasięgu działania,
- * bo nie zostały potwierdzone.
- * TODO: gdy potwierdzisz realne warunki (czas wyceny, obsługa wysyłkowa,
- * minimalne nakłady) — doprecyzuj odpowiedzi, to mocno podniesie konwersję.
- */
 export const faq = [
   {
     q: 'Jak szybko otrzymam wycenę?',

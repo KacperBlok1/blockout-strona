@@ -107,7 +107,6 @@ export function Footer() {
               <h2 className="footer__col-title" id="footer-company-title">
                 Firma
               </h2>
-              {/* TODO: utworzyć te podstrony lub podmienić linki */}
               <ul
                 className="footer__list"
                 aria-labelledby="footer-company-title"
